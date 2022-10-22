@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { config as envConfig } from 'dotenv'
-import { userRouter } from './routes'
+import { todoRouter, userRouter } from './routes'
 
 envConfig()
 
@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1', userRouter)
+app.use('/api/v1', todoRouter)
 
 const PORT = process.env.PORT || 8080
 
