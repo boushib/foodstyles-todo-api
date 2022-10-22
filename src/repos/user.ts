@@ -1,11 +1,8 @@
 import { pool } from '../db'
 
 export class UserRepo {
-  static async findWithEmailAndPassword({ email, password }: { email: string; password: string }) {
-    const { rows } = await pool.query(`SELECT * FROM users WHERE email = $1 AND password = $2;`, [
-      email,
-      password,
-    ])
+  static async findByEmail(email: string) {
+    const { rows } = await pool.query(`SELECT * FROM users WHERE email = $1;`, [email])
     return rows[0]
   }
 
@@ -18,10 +15,14 @@ export class UserRepo {
     email: string
     password: string
   }) {
-    const { rows } = await pool.query(
-      `INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *;`,
-      [name, email, password]
-    )
-    return rows[0]
+    try {
+      const { rows } = await pool.query(
+        `INSERT INTO users (name, email, password) VALUES($1, $2, $3) RETURNING *;`,
+        [name, email, password]
+      )
+      return rows[0]
+    } catch (error) {
+      console.log({ error })
+    }
   }
 }
