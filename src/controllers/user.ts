@@ -70,6 +70,21 @@ export const signup = async (req: Request, res: Response) => {
     const salt = await genSalt(10)
     const hashedPassword = await hash(password, salt)
     const user = await UserRepo.create({ name, email, password: hashedPassword })
+
+    // Generate JWT
+    const { id, created_at, updated_at } = user
+    const token = sign({ id, email }, process.env.JWT_SECRET!)
+
+    res.status(200).json({
+      user: {
+        id,
+        name,
+        email,
+        created_at,
+        updated_at,
+      },
+      token,
+    })
     res.status(201).json(user)
   } catch (err) {
     res.status(500).json({ message: err })
