@@ -12,7 +12,7 @@ This is the backend API for _FoodStyles_ a minimal & clean todo application to h
 
 ## Dev Environment
 
-Create a `.env` file in your frontend root directly and include this environment variables.
+Create a `.env` file in your frontend root directory and include this environment variables (Make sure to create a new `foodstyles` database).
 
 ```text
 PORT=8080
@@ -37,13 +37,13 @@ To run migrations, make sure your postgres database instance is up and running, 
 yarn migrate up
 ```
 
-Run the server in development mode. (This will automatically run the sever on port `8080` if no port is specified as env variable)
+Run the server in development mode (This will automatically run the sever on port `8080` if no port is specified as env variable).
 
 ```text
 yarn dev
 ```
 
-Builds the server for production
+Build the API for production
 
 ```text
 yarn build
