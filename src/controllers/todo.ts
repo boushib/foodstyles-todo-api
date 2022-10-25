@@ -60,7 +60,7 @@ export const updateTodo = async (req: IRequest, res: Response) => {
     }
 
     const todo = await TodoRepo.updateStatus({ id, status })
-    res.status(201).json(todo)
+    res.status(200).json(todo)
   } catch (err) {
     res.status(500).json({ message: err })
   }
@@ -81,7 +81,7 @@ export const deleteTodo = async (req: IRequest, res: Response) => {
     }
 
     const todo = await TodoRepo.delete(id)
-    res.status(201).json(todo)
+    res.status(200).json(todo)
   } catch (err) {
     res.status(500).json({ message: err })
   }
